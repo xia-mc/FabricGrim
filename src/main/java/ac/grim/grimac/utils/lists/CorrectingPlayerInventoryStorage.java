@@ -105,7 +105,7 @@ public class CorrectingPlayerInventoryStorage extends InventoryStorage {
             ItemStack toPE = SpigotConversionUtil.fromBukkitItemStack(bukkitItem);
 
             if (existing.getType() != toPE.getType() || existing.getAmount() != toPE.getAmount()) {
-                FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer,GrimAPI.INSTANCE.getPlugin(), () -> {
+                FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer,GrimAPI.INSTANCE.getSERVER(), () -> {
                     player.bukkitPlayer.updateInventory();
                 }, null, 0);
                 setItem(slot, toPE);
@@ -126,7 +126,7 @@ public class CorrectingPlayerInventoryStorage extends InventoryStorage {
         }
 
         if (player.getInventory().needResend) {
-            FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getPlugin(), () -> {
+            FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getSERVER(), () -> {
                 // Potential race condition doing this multiple times
                 if (!player.getInventory().needResend) return;
 

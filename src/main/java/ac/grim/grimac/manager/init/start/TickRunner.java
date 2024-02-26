@@ -12,13 +12,13 @@ public class TickRunner implements Initable {
         LogUtil.info("Registering tick schedulers...");
 
         if (FoliaCompatUtil.isFolia()) {
-            FoliaCompatUtil.runTaskTimerAsync(GrimAPI.INSTANCE.getPlugin(), (dummy) -> {
+            FoliaCompatUtil.runTaskTimerAsync(GrimAPI.INSTANCE.getSERVER(), (dummy) -> {
                 GrimAPI.INSTANCE.getTickManager().tickSync();
                 GrimAPI.INSTANCE.getTickManager().tickAsync();
             }, 1, 1);
         } else {
-            Bukkit.getScheduler().runTaskTimer(GrimAPI.INSTANCE.getPlugin(), () -> GrimAPI.INSTANCE.getTickManager().tickSync(), 0, 1);
-            Bukkit.getScheduler().runTaskTimerAsynchronously(GrimAPI.INSTANCE.getPlugin(), () -> GrimAPI.INSTANCE.getTickManager().tickAsync(), 0, 1);
+            Bukkit.getScheduler().runTaskTimer(GrimAPI.INSTANCE.getSERVER(), () -> GrimAPI.INSTANCE.getTickManager().tickSync(), 0, 1);
+            Bukkit.getScheduler().runTaskTimerAsynchronously(GrimAPI.INSTANCE.getSERVER(), () -> GrimAPI.INSTANCE.getTickManager().tickAsync(), 0, 1);
         }
     }
 }

@@ -19,13 +19,13 @@ public class ConfigManager {
     @Getter
     private final DynamicConfig config;
     @Getter
-    private final File configFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "config.yml");
+    private final File configFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "config.yml");
     @Getter
-    private final File messagesFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "messages.yml");
+    private final File messagesFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "messages.yml");
     @Getter
-    private final File discordFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "discord.yml");
+    private final File discordFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "discord.yml");
     @Getter
-    private final File punishFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "punishments.yml");
+    private final File punishFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "punishments.yml");
     @Getter
     private int maxPingTransaction = 60; // This is just a really hot variable so cache it.
 
@@ -38,7 +38,7 @@ public class ConfigManager {
         upgrade();
 
         // load config
-        GrimAPI.INSTANCE.getPlugin().getDataFolder().mkdirs();
+        GrimAPI.INSTANCE.getSERVER().getDataFolder().mkdirs();
         config = new DynamicConfig();
         config.addSource(GrimAC.class, "config", getConfigFile());
         config.addSource(GrimAC.class, "messages", getMessagesFile());
@@ -95,7 +95,7 @@ public class ConfigManager {
     }
 
     private void upgrade() {
-        File config = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "config.yml");
+        File config = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "config.yml");
         if (config.exists()) {
             try {
                 String configString = new String(Files.readAllBytes(config.toPath()));
@@ -155,7 +155,7 @@ public class ConfigManager {
 
     private void removeLegacyTwoPointOne(File config) throws IOException {
         // If config doesn't have config-version, it's a legacy config
-        Files.move(config.toPath(), new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "config-2.1.old.yml").toPath());
+        Files.move(config.toPath(), new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "config-2.1.old.yml").toPath());
     }
 
     private void addMaxPing(File config, String configString) throws IOException {
@@ -168,7 +168,7 @@ public class ConfigManager {
 
     // TODO: Write conversion for this... I'm having issues with windows new lines
     private void addMissingPunishments() {
-        File config = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "punishments.yml");
+        File config = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "punishments.yml");
         String configString;
         if (config.exists()) {
             try {
@@ -208,7 +208,7 @@ public class ConfigManager {
         } catch (IOException ignored) {
         }
 
-        File punishConfig = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "punishments.yml");
+        File punishConfig = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "punishments.yml");
         String punishConfigString;
         if (punishConfig.exists()) {
             try {
@@ -221,7 +221,7 @@ public class ConfigManager {
     }
 
     private void addBaritoneCheck() {
-        File config = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "punishments.yml");
+        File config = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "punishments.yml");
         String configString;
         if (config.exists()) {
             try {
@@ -238,7 +238,7 @@ public class ConfigManager {
         configString = configString.replace("threshold: 0.00001", "threshold: 0.001"); // 1e-6 -> 1e-4 antikb flag
         Files.write(config.toPath(), configString.getBytes());
 
-        File discordFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "discord.yml");
+        File discordFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "discord.yml");
 
         if (discordFile.exists()) {
             try {
@@ -269,7 +269,7 @@ public class ConfigManager {
                 "  print-to-console: false\n";
         Files.write(config.toPath(), configString.getBytes());
 
-        File messageFile = new File(GrimAPI.INSTANCE.getPlugin().getDataFolder(), "messages.yml");
+        File messageFile = new File(GrimAPI.INSTANCE.getSERVER().getDataFolder(), "messages.yml");
         if (messageFile.exists()) {
             try {
                 String messagesString = new String(Files.readAllBytes(messageFile.toPath()));

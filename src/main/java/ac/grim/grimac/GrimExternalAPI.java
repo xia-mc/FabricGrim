@@ -65,7 +65,7 @@ public class GrimExternalAPI implements GrimAbstractAPI, Initable {
 
     @Override
     public String getGrimVersion() {
-        PluginDescriptionFile description = GrimAPI.INSTANCE.getPlugin().getDescription();
+        PluginDescriptionFile description = GrimAPI.INSTANCE.getSERVER().getDescription();
         return description.getVersion();
     }
 

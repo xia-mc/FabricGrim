@@ -154,7 +154,7 @@ public class PunishmentManager {
                                 }
 
                                 String finalCmd = cmd;
-                                FoliaCompatUtil.runTask(GrimAPI.INSTANCE.getPlugin(), (dummy) -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCmd));
+                                FoliaCompatUtil.runTask(GrimAPI.INSTANCE.getSERVER(), (dummy) -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCmd));
                             }
                         }
 

@@ -20,11 +20,8 @@ public class FloodgateUtil {
             CHECKED_FOR_FLOODGATE = true;
         }
 
-        if (FLOODGATE_PRESENT) {
-            return FloodgateApi.getInstance().isFloodgatePlayer(uuid);
-        } else {
-            return false;
-        }
+        if (FLOODGATE_PRESENT) return FloodgateApi.getInstance().isFloodgatePlayer(uuid);
+        return false;
     }
 
 }

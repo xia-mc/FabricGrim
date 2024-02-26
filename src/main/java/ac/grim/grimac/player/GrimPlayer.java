@@ -423,7 +423,7 @@ public class GrimPlayer implements GrimUser {
         }
         user.closeConnection();
         if (bukkitPlayer != null) {
-            FoliaCompatUtil.runTaskForEntity(bukkitPlayer, GrimAPI.INSTANCE.getPlugin(), () -> bukkitPlayer.kickPlayer(textReason), null, 1);
+            FoliaCompatUtil.runTaskForEntity(bukkitPlayer, GrimAPI.INSTANCE.getSERVER(), () -> bukkitPlayer.kickPlayer(textReason), null, 1);
         }
     }
 

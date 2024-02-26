@@ -1,0 +1,92 @@
+plugins {
+	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	mavenLocal()
+//	maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot
+//	maven("https://jitpack.io/") // Grim API
+//	maven("https://repo.viaversion.com") // ViaVersion
+//	maven("https://repo.aikar.co/content/groups/aikar/") // ACF
+//	maven("https://nexus.scarsz.me/content/repositories/releases") // Configuralize
+	maven { url = uri("https://repo.opencollab.dev/main/") } // Geyser
+	maven { url 'https://repo.codemc.io/repository/maven-releases/' } // PacketEvents
+	mavenCentral()
+//	// FastUtil, Discord-Webhooks
+}
+
+
+dependencies {
+	mappings loom.officialMojangMappings()
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+
+
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	compileOnly "org.projectlombok:lombok:1.18.24"
+	compileOnly 'com.github.retrooper.packetevents:netty-common:2.2.1'
+	compileOnly('org.geysermc.geyser:api:2.2.0-SNAPSHOT')
+	compileOnly('org.geysermc.floodgate:api:2.2.2-SNAPSHOT')
+
+	annotationProcessor "org.projectlombok:lombok:1.18.24"
+	// Uncomment the following line to enable the deprecated Fabric API modules. 
+	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
+
+	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
+	}
+}

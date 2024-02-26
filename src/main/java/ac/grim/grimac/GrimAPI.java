@@ -4,9 +4,7 @@ import ac.grim.grimac.api.GrimAbstractAPI;
 import ac.grim.grimac.manager.*;
 import ac.grim.grimac.utils.anticheat.PlayerDataManager;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.ServicePriority;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.minecraft.server.MinecraftServer;
 
 @Getter
 public enum GrimAPI {
@@ -20,23 +18,23 @@ public enum GrimAPI {
     private final GrimExternalAPI externalAPI = new GrimExternalAPI(this);
     private InitManager initManager;
     private ConfigManager configManager;
-    private JavaPlugin plugin;
+    private static MinecraftServer SERVER;
 
-    public void load(final JavaPlugin plugin) {
-        this.plugin = plugin;
+    public void load(final MinecraftServer plugin) {
+        SERVER = plugin;
         this.configManager = new ConfigManager();
         initManager = new InitManager();
         initManager.load();
     }
 
-    public void start(final JavaPlugin plugin) {
-        this.plugin = plugin;
+    public void start(final MinecraftServer plugin) {
+        SERVER = plugin;
         initManager.start();
         Bukkit.getServicesManager().register(GrimAbstractAPI.class, externalAPI, plugin, ServicePriority.Normal);
     }
 
-    public void stop(final JavaPlugin plugin) {
-        this.plugin = plugin;
+    public void stop(final MinecraftServer plugin) {
+        SERVER = plugin;
         initManager.stop();
     }
 }

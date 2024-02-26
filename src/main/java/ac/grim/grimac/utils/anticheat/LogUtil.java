@@ -22,7 +22,7 @@ public class LogUtil {
     }
 
     public Logger getLogger() {
-        return GrimAPI.INSTANCE.getPlugin().getLogger();
+        return GrimAPI.INSTANCE.getSERVER().getLogger();
     }
 
     public void console(final String info) {

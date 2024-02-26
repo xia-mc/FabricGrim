@@ -107,7 +107,7 @@ public class FastBreak extends Check implements PacketCheck {
                 }
 
                 if (blockBreakBalance > 1000) { // If more than a second of advantage
-                    FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getPlugin(), () -> {
+                    FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getSERVER(), () -> {
                         Player bukkitPlayer = player.bukkitPlayer;
                         if (bukkitPlayer == null || !bukkitPlayer.isOnline()) return;
 

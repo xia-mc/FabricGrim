@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "fabric-grim",
+	"version": "${version}",
+	"name": "FabricGrim",
+	"description": "Fabric version of Grim Anti-Cheat.",
+	"authors": [
+		"xia__mc"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/grim/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ac.grim.grimac"
+		]
+	},
+	"mixins": [
+		"grim.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

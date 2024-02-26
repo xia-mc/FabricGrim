@@ -6,7 +6,6 @@ import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import com.github.retrooper.packetevents.netty.channel.ChannelHelper;
 import com.github.retrooper.packetevents.protocol.player.User;
-import io.github.retrooper.packetevents.util.GeyserUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

@@ -11,7 +11,7 @@ public class PacketEventsInit implements Initable {
     public void start() {
         LogUtil.info("Loading PacketEvents...");
 
-        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(GrimAPI.INSTANCE.getPlugin()));
+        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(GrimAPI.INSTANCE.getSERVER()));
         PacketEvents.getAPI().getSettings().bStats(true).checkForUpdates(false).debug(false);
         PacketEvents.getAPI().load();
     }

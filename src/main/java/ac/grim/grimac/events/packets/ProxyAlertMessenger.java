@@ -2,7 +2,6 @@ package ac.grim.grimac.events.packets;
 
 import ac.grim.grimac.GrimAPI;
 import ac.grim.grimac.utils.anticheat.LogUtil;
-import ac.grim.grimac.utils.anticheat.MessageUtil;
 import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.PacketListenerAbstract;
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
@@ -29,7 +28,7 @@ public class ProxyAlertMessenger extends PacketListenerAbstract {
 
         if (usingProxy) {
             LogUtil.info("Registering an outgoing plugin channel...");
-            GrimAPI.INSTANCE.getPlugin().getServer().getMessenger().registerOutgoingPluginChannel(GrimAPI.INSTANCE.getPlugin(), "BungeeCord");
+            GrimAPI.INSTANCE.getSERVER().getServer().getMessenger().registerOutgoingPluginChannel(GrimAPI.INSTANCE.getSERVER(), "BungeeCord");
         }
     }
 
@@ -84,7 +83,7 @@ public class ProxyAlertMessenger extends PacketListenerAbstract {
         out.writeShort(messageBytes.toByteArray().length);
         out.write(messageBytes.toByteArray());
 
-        Iterables.getFirst(Bukkit.getOnlinePlayers(), null).sendPluginMessage(GrimAPI.INSTANCE.getPlugin(), "BungeeCord", out.toByteArray());
+        Iterables.getFirst(Bukkit.getOnlinePlayers(), null).sendPluginMessage(GrimAPI.INSTANCE.getSERVER(), "BungeeCord", out.toByteArray());
     }
 
     public static boolean canSendAlerts() {

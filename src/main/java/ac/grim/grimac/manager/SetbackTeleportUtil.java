@@ -221,7 +221,7 @@ public class SetbackTeleportUtil extends Check implements PostPredictionCheck {
                     player.getSetbackTeleportUtil().cheatVehicleInterpolationDelay = Integer.MAX_VALUE; // Set to max until player accepts the new position
 
                     // Make sure bukkit also knows the player got teleported out of their vehicle, can't do this async
-                    FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getPlugin(), () -> {
+                    FoliaCompatUtil.runTaskForEntity(player.bukkitPlayer, GrimAPI.INSTANCE.getSERVER(), () -> {
                         if (player.bukkitPlayer != null) {
                             Entity vehicle = player.bukkitPlayer.getVehicle();
                             if (vehicle != null) {

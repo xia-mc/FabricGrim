@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 public class PacketLimiter implements Initable {
     @Override
     public void start() {
-        FoliaCompatUtil.runTaskTimerAsync(GrimAPI.INSTANCE.getPlugin(), (dummy) -> {
+        FoliaCompatUtil.runTaskTimerAsync(GrimAPI.INSTANCE.getSERVER(), (dummy) -> {
             for (GrimPlayer player : GrimAPI.INSTANCE.getPlayerDataManager().getEntries()) {
                 // Avoid concurrent reading on an integer as it's results are unknown
                 player.cancelledPackets.set(0);

@@ -33,7 +33,7 @@ public class GrimLog extends BaseCommand {
 
             sender.sendMessage(MessageUtil.format(uploading));
 
-            FoliaCompatUtil.runTaskAsync(GrimAPI.INSTANCE.getPlugin(), () -> {
+            FoliaCompatUtil.runTaskAsync(GrimAPI.INSTANCE.getSERVER(), () -> {
                 try {
                     URL mUrl = new URL("https://paste.grim.ac/data/post");
                     HttpURLConnection urlConn = (HttpURLConnection) mUrl.openConnection();
